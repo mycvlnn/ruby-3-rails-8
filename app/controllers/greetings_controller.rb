@@ -1,5 +1,5 @@
 class GreetingsController < ApplicationController
-  def hello
-  @name = "MycvLNN"
+  def index
+    @name = "MycvLNN"
   end
 end
