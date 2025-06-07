@@ -1,0 +1,3 @@
+<h1><%= @product.name %></h1>
+<p><strong>Mô tả:</strong> <%= @product.description %></p>
+<p><strong>Giá:</strong> <%= number_to_currency(@product.price, unit: "₫", delimiter: ".", format: "%n %u") %></p>

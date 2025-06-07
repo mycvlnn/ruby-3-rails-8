@@ -2,13 +2,13 @@ Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   # Web
   resources :greetings, only: [ :index ]
-  resources :products, only: [ :index ]
+  resources :products, only: [ :index, :show ]
 
   # API
   namespace :api do
     namespace :v1 do
       resources :products, only: [ :index, :show ]
-      resources :greetings, only: [ :hello ]
+      resources :greetings, only: [ :index ]
     end
   end
 
