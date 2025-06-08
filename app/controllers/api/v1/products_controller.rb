@@ -2,14 +2,14 @@ module Api
   module V1
     class ProductsController < BaseController
       before_action :validate_product_params, only: [ :create ]
+      before_action :set_product, only: [ :show, :update ]
 
       def index
         render json: Product.all
       end
 
       def show
-        product = Product.find(params[:id])
-        render json: product
+        render json: @product
       end
 
       def create
@@ -17,26 +17,26 @@ module Api
         if product.save
           render json: product, status: :ok
         else
-          custom_error = format_model_errors(product)
-          render json: { errors: custom_error }, status: :unprocessable_entity
+          render_model_errors(product)
         end
       end
 
       def update
-        product = Product.find(params[:id])
-        if product.update(product_params)
-          render json: product, status: :ok
+        if @product.update(product_params)
+          render json: @product, status: :ok
         else
-          custom_error = format_model_errors(product)
-          render json: { errors: custom_error }, status: :unprocessable_entity
+          render_model_errors(@product)
         end
       end
 
       private
 
-      # Strong parameters for product creation
       def product_params
         params.require(:product).permit(:name, :description, :price)
+      end
+
+      def set_product
+        @product = Product.find(params[:id])
       end
 
       def validate_product_params
@@ -48,9 +48,12 @@ module Api
         errors << { field: "description", message: "Description cannot be blank", code: "blank" } if description.blank?
         errors << { field: "price", message: "Price must be a number", code: "not_a_number" } unless price.is_a?(Numeric)
 
-        if errors.any?
-          render json: { errors: errors }, status: :unprocessable_entity and return
-        end
+        render json: { errors: errors }, status: :unprocessable_entity and return if errors.any?
+      end
+
+      def render_model_errors(model)
+        custom_error = format_model_errors(model)
+        render json: { errors: custom_error }, status: :unprocessable_entity
       end
     end
   end
