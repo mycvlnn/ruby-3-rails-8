@@ -1,9 +1,104 @@
-<h1>Products</h1>
+<h1 class="products-title">Products</h1>
 
-<div id="products">
-  <% @products.each do |product| %>
-    <div>
-      <%= link_to product.name, product_path(product) %>
-    </div>
-  <% end %>
+<div class="products-header">
+  <%= link_to "+ New Product", new_product_path, class: "btn btn-primary new-product-btn" %>
 </div>
+
+<div class="products-table-container">
+  <table class="products-table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <%# Add more headers if you want to show more details %>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @products.each do |product| %>
+        <tr>
+          <td>
+            <%= link_to product.name, product_path(product), class: "product-link" %>
+          </td>
+          <td>
+            <%= link_to "View", product_path(product), class: "btn btn-sm btn-outline-primary" %>
+            <%# Add more actions if needed %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<style>
+body {
+  padding: 40px 0;
+  background: #f4f6f8;
+}
+
+.products-title {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.products-header {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 30px;
+  padding: 0 38px;
+}
+
+.products-table-container {
+  max-width: 900px;
+  margin: 0 auto;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+  padding: 32px;
+}
+
+.products-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.products-table th, .products-table td {
+  padding: 16px 12px;
+  text-align: left;
+}
+
+.products-table th {
+  background: #f1f3f6;
+  font-weight: 600;
+}
+
+.products-table tr:nth-child(even) {
+  background: #fafbfc;
+}
+
+.product-link {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.btn {
+  padding: 6px 16px;
+  border-radius: 4px;
+  background: #007bff;
+  color: #fff;
+  text-decoration: none;
+  border: none;
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+
+.btn-outline-primary {
+  background: #fff;
+  color: #007bff;
+  border: 1px solid #007bff;
+}
+
+.btn-sm {
+  padding: 4px 10px;
+  font-size: 0.9rem;
+}
+</style>
