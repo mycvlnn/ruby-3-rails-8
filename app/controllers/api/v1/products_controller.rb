@@ -42,16 +42,6 @@ module Api
           render json: { errors: errors }, status: :unprocessable_entity and return
         end
       end
-
-      def format_model_errors(model)
-        model.errors.map do |error|
-          {
-            field: error.attribute,
-            message: error.message,
-            code: error.type
-          }
-        end
-      end
     end
   end
 end
