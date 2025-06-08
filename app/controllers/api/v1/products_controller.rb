@@ -22,6 +22,16 @@ module Api
         end
       end
 
+      def update
+        product = Product.find(params[:id])
+        if product.update(product_params)
+          render json: product, status: :ok
+        else
+          custom_error = format_model_errors(product)
+          render json: { errors: custom_error }, status: :unprocessable_entity
+        end
+      end
+
       private
 
       # Strong parameters for product creation

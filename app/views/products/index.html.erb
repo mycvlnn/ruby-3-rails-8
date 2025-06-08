@@ -9,6 +9,7 @@
   <table class="products-table">
     <thead>
       <tr>
+        <th>ID</th>
         <th>Name</th>
         <th>Description</th>
         <th>Price</th>
@@ -19,6 +20,9 @@
     <tbody>
       <% @products.each do |product| %>
         <tr>
+          <td>
+            <%= product.id %>
+          </td>
           <td>
             <%= link_to product.name, product_path(product), class: "product-link" %>
           </td>
