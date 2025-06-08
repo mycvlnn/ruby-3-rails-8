@@ -1,8 +1,8 @@
 <%= form_with model: product, local: true, class: "product-form" do |form| %>
     <% if product.errors.any? %>
         <div id="error_explanation">
-            <h2><%= pluralize(product.errors.count, "error") %> prohibited this product from being saved:</h2>
-            <ul>
+            <h2 class="heading_error"><%= pluralize(product.errors.count, "error") %> prohibited this product from being saved:</h2>
+            <ul class="error-list">
                 <% product.errors.full_messages.each do |msg| %>
                     <li><%= msg %></li>
                 <% end %>
@@ -26,6 +26,6 @@
     </div>
 
     <div class="actions">
-        <%= form.submit label_submit, class: "btn btn-primary" %>
+        <%= form.submit label_submit, class: "btn_submit" %>
     </div>
 <% end %>
