@@ -9,6 +9,8 @@
     <thead>
       <tr>
         <th>Name</th>
+        <th>Description</th>
+        <th>Price</th>
         <%# Add more headers if you want to show more details %>
         <th>Actions</th>
       </tr>
@@ -19,9 +21,11 @@
           <td>
             <%= link_to product.name, product_path(product), class: "product-link" %>
           </td>
+          <td><%= product.description %></td>
+          <td><%= number_to_currency(product.price) %></td>
           <td>
             <%= link_to "View", product_path(product), class: "btn btn-sm btn-outline-primary" %>
-            <%# Add more actions if needed %>
+            <%= link_to "Edit", edit_product_path(product), class: "btn btn-sm btn-outline-edit" %>
           </td>
         </tr>
       <% end %>
@@ -95,6 +99,13 @@ body {
   background: #fff;
   color: #007bff;
   border: 1px solid #007bff;
+}
+
+.btn-outline-edit  {
+  margin-left: 8px;
+  background: #fffbe6;
+  color: #b8860b;
+  border: 1px solid #b8860b;
 }
 
 .btn-sm {

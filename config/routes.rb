@@ -2,12 +2,12 @@ Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   # Web
   resources :greetings, only: [ :index ]
-  resources :products, only: [ :index, :show, :create, :new ]
+  resources :products, only: [ :index, :show, :create, :new, :edit, :update, :destroy ]
 
   # API
   namespace :api do
     namespace :v1 do
-      resources :products, only: [ :index, :show, :create ]
+      resources :products, only: [ :index, :show, :create, :update, :destroy ]
       resources :greetings, only: [ :index ]
     end
   end
