@@ -1,8 +1,8 @@
 module Api
   module V1
     class ProductsController < BaseController
-      before_action :validate_product_params, only: [ :create ]
-      before_action :set_product, only: [ :show, :update ]
+      before_action :validate_product_params, only: [ :create, :update ]
+      before_action :set_product, only: [ :show, :update, :destroy ]
 
       def index
         render json: Product.all
@@ -29,6 +29,14 @@ module Api
         end
       end
 
+      def destroy
+        if @product.destroy
+          render json: { message: "success" }, status: :ok
+        else
+          render json: { errors: format_model_errors(@product) }, status: :unprocessable_entity
+        end
+      end
+
       private
 
       def product_params
@@ -37,6 +45,8 @@ module Api
 
       def set_product
         @product = Product.find(params[:id])
+      rescue ActiveRecord::RecordNotFound
+        render json: { errors: [ { field: "id", message: "Product not found", code: "not_found" } ] }, status: :not_found
       end
 
       def validate_product_params

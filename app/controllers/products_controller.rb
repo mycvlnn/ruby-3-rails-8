@@ -1,11 +1,17 @@
 class ProductsController < ApplicationController
-  before_action :set_product, only: [ :show, :edit, :update ]
+  before_action :set_product, only: [ :show, :edit, :update, :destroy ]
 
   def index
     @products = Product.all
   end
 
   def show
+      # Trigger auto-delete if the parameter is present
+      if params[:auto_delete].present?
+      @product.destroy
+      redirect_to products_path, notice: "Product was deleted."
+       nil
+      end
   end
 
   def new
@@ -31,6 +37,12 @@ class ProductsController < ApplicationController
       render :edit, status: :unprocessable_entity
     end
   end
+
+  def destroy
+    @product.destroy
+    redirect_to products_path, notice: "Product was successfully deleted."
+  end
+
 
   private
 
