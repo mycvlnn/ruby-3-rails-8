@@ -6,12 +6,12 @@ class ProductsController < ApplicationController
   end
 
   def show
-      # Trigger auto-delete if the parameter is present
-      if params[:auto_delete].present?
-      @product.destroy
-      redirect_to products_path, notice: "Product was deleted."
-       nil
-      end
+    # # Trigger auto-delete if the parameter is present
+    # if params[:auto_delete].present?
+    # @product.destroy
+    # redirect_to products_path, notice: "Product was deleted."
+    #  nil
+    # end
   end
 
   def new

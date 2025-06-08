@@ -82,10 +82,15 @@
     background: #ffe6e6;
     color: #d9534f;
     border: 1px solid #d9534f;
+    font-size: inherit;
 }
 
 .btn-sm {
     padding: 4px 10px;
+}
+
+.form_delete {
+    display: flex;
 }
 
 /* Form */
