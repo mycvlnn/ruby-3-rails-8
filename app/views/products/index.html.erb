@@ -13,6 +13,7 @@
         <th>Name</th>
         <th>Description</th>
         <th>Price</th>
+        <th>Status</th>
         <%# Add more headers if you want to show more details %>
         <th>Actions</th>
       </tr>
@@ -28,6 +29,12 @@
           </td>
           <td><%= product.description %></td>
           <td><%= number_to_currency(product.price) %></td>
+          <td>
+          <%= button_to (product.active ? "Active": "Inactive"), toggle_status_product_path(product), method: :put, 
+                  class: "btn btn-toggle-status #{product.active ? 'btn-active' : 'btn-inactive'}", 
+                  data: { turbo_confirm: "Are you sure?" },
+                  form: { class: "form_delete" } %>
+          </td>
           <td>
             <div class="product-actions">
               <%= link_to "View", product_path(product), class: "btn btn-sm btn-outline-primary" %>

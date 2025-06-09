@@ -2,7 +2,11 @@ Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   # Web
   resources :greetings, only: [ :index ]
-  resources :products, only: [ :index, :show, :create, :new, :edit, :update, :destroy ]
+  resources :products, only: [ :index, :show, :create, :new, :edit, :update, :destroy ] do
+    member do
+      put :toggle_status
+    end
+  end
 
   # API
   namespace :api do
