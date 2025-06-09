@@ -2,7 +2,7 @@ module Api
   module V1
     class ProductsController < BaseController
       before_action :validate_product_params, only: [ :create, :update ]
-      before_action :set_product, only: [ :show, :update, :destroy ]
+      before_action :set_product, only: [ :show, :update, :destroy, :toggle_status ]
 
       def index
         render json: Product.all
@@ -23,7 +23,7 @@ module Api
 
       def update
         if @product.update(product_params)
-          render json: @product, status: :ok
+          render json:  { message: "success", data: @product }, status: :ok
         else
           render_model_errors(@product)
         end
@@ -32,6 +32,14 @@ module Api
       def destroy
         if @product.destroy
           render json: { message: "success" }, status: :ok
+        else
+          render json: { errors: format_model_errors(@product) }, status: :unprocessable_entity
+        end
+      end
+
+      def toggle_status
+        if @product.toggle!(:active)
+          render json: { message: "success", data: @product }, status: :ok
         else
           render json: { errors: format_model_errors(@product) }, status: :unprocessable_entity
         end

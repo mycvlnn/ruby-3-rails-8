@@ -11,7 +11,11 @@ Rails.application.routes.draw do
   # API
   namespace :api do
     namespace :v1 do
-      resources :products, only: [ :index, :show, :create, :update, :destroy ]
+      resources :products, only: [ :index, :show, :create, :update, :destroy ] do
+        member do
+          put :toggle_status
+        end
+      end
       resources :greetings, only: [ :index ]
     end
   end
